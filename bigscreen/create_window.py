@@ -232,10 +232,27 @@ class App(tk.CTk):
 
         self.content_up = tk.CTkFrame(self,width=900,height=100,fg_color='red')
         self.content_up.grid(row=0,column=2,sticky='ne',padx=10,pady=10)
+        self.account_frame = tk.CTkFrame(self,width=282,height=50)
+
+
+
+
+
+
         self.content_middle = tk.CTkFrame(self,width=900,height=300,fg_color='blue')
         self.content_middle.grid(row=0,column=2,sticky='ne',padx=10,pady=120)
+
+
+
+
         self.content_bottom = tk.CTkFrame(self,width=900,height=250,fg_color='green')
         self.content_bottom.grid(row=0,column=2,sticky='ne',padx=10,pady=430)
+
+
+
+
+
+
 
         
 app = App()
