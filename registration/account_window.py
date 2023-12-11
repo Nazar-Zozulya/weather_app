@@ -31,8 +31,8 @@ class Account(tk.CTk):
         # else:
         #     surname = pen.fetchone()[3]
         # print(pen.fetchall())
-        a = pen.fetchone()
-        print(a)
+        # a = pen.fetchone()
+        # print(a)
         # country = pen.fetchone()[0]
         # city = pen.fetchone()[1]
         # name = pen.fetchone()[2]
