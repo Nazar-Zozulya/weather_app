@@ -23,7 +23,7 @@ class Account(tk.CTk):
         # if pen is not None:
 
 
-        pen.execute("SELECT * FROM users")
+        pen.execute("SELECT rowid, * FROM users")
         # if pen is not None:
         #     country = pen.fetchone()[0]
         #     city = pen.fetchone()[1]
@@ -44,12 +44,10 @@ class Account(tk.CTk):
             # pen.fetchone()[3],
         # ]
         for i in pen:
-            print(i[1])
-            print(i[2])
-            country = i[0]
-            city = i[1]
-            name = i[2]
-            surname = i[3]
+            country = i[1]
+            city = i[2]
+            name = i[3]
+            surname = i[4]
 
         # self.city_image_path = os.path.join(os.path.dirname(__file__), 'icon\user.png')
 

@@ -5,7 +5,6 @@ import json
 import sqlite3 
 import os
 
-
 # city = input("Enter the city name: ")
 # url_api = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_key}"
 # path = os.path.abspath(__file__+"/../../user_data")
@@ -15,6 +14,8 @@ import os
 db = sqlite3.connect('user_data.db')
 
 pen = db.cursor()
+
+go_to_main = False
 
 # pen.execute("""CREATE TABLE IF NOT EXISTS users (
 #         country TEXT,
@@ -126,44 +127,21 @@ class Register(tk.CTk):
                                 )
         self.surname_field.grid(row=0, column=0,padx=8,pady=44+270,sticky='wn')
         
-        pen.execute("SELECT * FROM users")
-
-        for i in pen:
-            country = i[0]
-            city = i[1]
-            name = i[2]
-            surname = i[3]
-            
 
         def inputs():
-            pen.execute(f"INSERT INTO users VALUES('{self.country_field.get("0.0", "end")}', '{self.city_field.get("0.0", "end")}', '{self.name_field.get("0.0", "end")}', '{self.surname_field.get("0.0", "end")}')")
-            # self.country_field.split('\\')[:-1]
-            # '\\'.join(self.country_field.split('-')[:-1])
-            # city.split('\n')
+            pen.execute(f"INSERT INTO users VALUES('{self.country_field.get("0.0", "end").replace("\n","")}', '{self.city_field.get("0.0", "end").replace("\n","")}', '{self.name_field.get("0.0", "end").replace("\n","")}', '{self.surname_field.get("0.0", "end").replace("\n","")}')")
+
             pen.execute("SELECT rowid, * FROM users")
             print(pen.fetchall())
             db.commit()
             db.close()
-
-            API_KEY = 'c3c7dd0d8e63c30b03f32d8c5b575f19'
-
-            # city_name = input("Enter the city name: ")
-
-            url_api = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}"
-
-            response = requests.get(url_api)
-
-            if response.status_code == 200:
-                data = response.json()
-                dict_weather = json.dumps(data, indent=4)
-                print(dict_weather)
-            else:
-                print("Error requests")
-                print(response)
-            print(city, "2312312")
+            go_to_main = True
+            
         self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 46, text='Зберегти', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18), command=inputs)
         self.save_button.grid(row=0, column=0, padx=0, pady=(320,0), )
             
+
+
             
 register = Register()
 # API_key = "58cd4aa232816cd0ae10351cb15604aa"
@@ -173,3 +151,8 @@ register = Register()
 # print(url_api, 'green')
 
 register.mainloop()
+
+# from create_window import *
+
+# if go_to_main == True:
+#     App()
