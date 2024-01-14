@@ -20,7 +20,10 @@ for i in pen:
 
 API_KEY = "EjK/pUSceurGv/tpIUDq9w==16ZFRu2PDzMdu8B6"
 
-api_url_kyiv = f'https://api.api-ninjas.com/v1/worldtime?city=Київ'
+pointed_api_url = api_url_kyiv = f'https://api.api-ninjas.com/v1/worldtime?city=Дніпро'
+pointed_response = requests.get(pointed_api_url, headers={'X-Api-Key': API_KEY})
+
+api_url_kyiv = f'https://api.api-ninjas.com/v1/worldtime?city=Київ&lang=ua'
 kyiv_response = requests.get(api_url_kyiv, headers={'X-Api-Key': API_KEY})
 
 api_url_rym = f'https://api.api-ninjas.com/v1/worldtime?city=Рим'
@@ -50,3 +53,14 @@ varchava_minute = varshava_response.json()["minute"]
 
 praga_hour = praga_response.json()["hour"]
 praga_minute = praga_response.json()["minute"]
+
+
+pointed_day_of_week = pointed_response.json()["day_of_week"]
+pointed_date = pointed_response.json()["date"]
+pointed_hour = pointed_response.json()["hour"]
+pointed_minute = pointed_response.json()["minute"]
+
+if kyiv_response.status_code == requests.codes.ok:
+    print(kyiv_response.text)
+else:
+    print("Error:", kyiv_response.status_code, kyiv_response.text)

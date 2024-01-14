@@ -1,4 +1,9 @@
-#import tkinter
+# from bigscreen.create_window import *
+# from bigscreen.registration_window import *
+# # import registration.registration_window              
+# from bigscreen.time_api import *                                                                                        
+# Register()
+
 import customtkinter as tk
 import sqlite3
 import os
@@ -6,7 +11,6 @@ import requests
 import json
 from PIL import Image
 from time_api import *
-
 
 
 db = sqlite3.connect('user_data.db')
@@ -43,6 +47,13 @@ london_response = requests.get(url_api_london)
 varchava_response = requests.get(url_api_varchava)
 praga_response = requests.get(url_api_praga)
 
+# pen.execute("""CREATE TABLE IF NOT EXISTS users (
+#         country TEXT,
+#         city TEXT,
+#         name TEXT,
+#         surname TEXT
+# )""")
+
 
 
 class Account(tk.CTkToplevel):
@@ -57,26 +68,7 @@ class Account(tk.CTkToplevel):
         # if pen is not None:
 
 
-        pen.execute("SELECT rowid, * FROM users")
-        # if pen is not None:
-        #     country = pen.fetchone()[0]
-        #     city = pen.fetchone()[1]
-        #     name = pen.fetchone()[2]
-        # else:
-        #     surname = pen.fetchone()[3]
-        # print(pen.fetchall())
-        # a = pen.fetchone()
-        # print(a)
-        # country = pen.fetchone()[0]
-        # city = pen.fetchone()[1]
-        # name = pen.fetchone()[2]
-        # surname = pen.fetchone()[3]
-        # bebra = [
-            # pen.fetchone()[0],
-            # pen.fetchone()[1],
-            # pen.fetchone()[2],
-            # pen.fetchone()[3],
-        # ]
+        pen.execute("SELECT rowid, * FROM users")        # ]
         for i in pen:
             country = i[1]
             city = i[2]
@@ -156,6 +148,49 @@ class Account(tk.CTkToplevel):
 
         self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 39, text='Перейти до додатку', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18),)
         self.save_button.grid(row=0, column=0, padx=115, pady=(530,0), sticky="wn")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -381,7 +416,7 @@ class App(tk.CTkToplevel):
 
 
 
-        self.account_button = tk.CTkButton(self.content_up, fg_color='red', width=50, height=40, text="",command=self.open_toplevel)
+        self.account_button = tk.CTkButton(self.content_up, fg_color='red', width=50, height=40, text="", command=self.open_toplevel)
         self.account_button.grid(row=0,column=0,padx=40,pady=20,sticky="wn")
 
         self.text_label = tk.CTkLabel(self.account_button, fg_color="#5DA7B1", text=f'{name} {surname}',bg_color='#5DA7B1',font = ("Roboto Slab", 20),)
@@ -399,14 +434,6 @@ class App(tk.CTkToplevel):
         self.search_image = tk.CTkImage(light_image= Image.open(self.search_image_path), size=(37,37),)
         self.search_image_label = tk.CTkLabel(self.search_field, image=self.search_image,fg_color="#096C82", text=' ',corner_radius=100,height=1)
         self.search_image_label.grid(row=0,column=0, padx=8,ipady=0,pady=10,sticky='ws'), 
-        # self.search_image_path = os.path.join(os.path.dirname(__file__), 'img\\search.png')
-        # self.search_image = tk.CTkImage(light_image= Image.open(self.image_path), size=(50,50),)
-        # # self.image.grid(row=0,column=0, padx=100)
-        # self.search_image_label = tk.CTkLabel(self.content_up, image=self.image,fg_color="#5DA7B1", text=' ')
-        # self.search_image_label.grid(row=0,column=0, padx=400,sticky='ne'), 
-        # self.text_label = tk.CTkTextbox(self.content_up, fg_color="#5DA7B1", bg_color='#5DA7B1',font = ("Roboto Slab", 16))
-        # self.text_label.grid(row=0,column=0, padx=363,pady=10,sticky='wn')
- 
 
 
 
@@ -446,7 +473,7 @@ class App(tk.CTkToplevel):
         self.content_bottom.grid(row=0,column=2,sticky='we',padx=10,pady=430)
 
 
-        # self.toplevel_window = None
+        self.toplevel_window = None
 
     def open_toplevel(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
@@ -483,9 +510,20 @@ class App(tk.CTkToplevel):
 
 
 
-class Register(tk.CTkToplevel): 
+
+
+
+
+
+
+
+
+
+
+
+class Register(tk.CTk):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__( *args, **kwargs)
         # Fields()
         self.geometry("460x645")
         self.title("Регистрація")
@@ -571,29 +609,19 @@ class Register(tk.CTkToplevel):
 
             pen.execute("SELECT rowid, * FROM users")
             print(pen.fetchall())
-
             db.commit()
             db.close()
-            # app = App()
-            App().mainloop()
+
             
-        self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 46, text='Зберегти', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18), command=inputs)
+        self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 46, text='Зберегти', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18), command=self.open_toplevel)
         self.save_button.grid(row=0, column=0, padx=0, pady=(320,0), )
         
-        # self.toplevel_window_app = None
-    # def open_toplevel_app(self):
-    #     if self.toplevel_window_app is None or not self.toplevel_window_app.winfo_exists():
-    #         # self.toplevel_window_app = App(self)  # create window if its None or destroyed
-    #     # else:
-    #         self.toplevel_window_app.focus()  # if window exists focus it
+        self.gitler = None
 
-
-
-        
-# app = App()
-
+    def open_toplevel(self):
+        if self.gitler is None or not self.gitler.winfo_exists():
+            self.gitler = App(self)  # create window if its None or destroyed
+        else:
+            self.gitler.focus()  # if window exists focus it
+ 
 Register().mainloop()
-
-
-
-

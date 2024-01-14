@@ -17,7 +17,7 @@ pen = db.cursor()
 
 go_to_main = False
 
-# pen.execute("""CREATE TABLE IF NOT EXISTS users (
+# pen.execute("""CREATE TABLE IF NOT EXISTS users ( 
 #         country TEXT,
 #         city TEXT,
 #         name TEXT,
