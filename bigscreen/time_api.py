@@ -20,7 +20,7 @@ for i in pen:
 
 API_KEY = "EjK/pUSceurGv/tpIUDq9w==16ZFRu2PDzMdu8B6"
 
-pointed_api_url = api_url_kyiv = f'https://api.api-ninjas.com/v1/worldtime?city=Дніпро'
+pointed_api_url = api_url_kyiv = f'https://api.api-ninjas.com/v1/worldtime?city=Dnipro'
 pointed_response = requests.get(pointed_api_url, headers={'X-Api-Key': API_KEY})
 
 api_url_kyiv = f'https://api.api-ninjas.com/v1/worldtime?city=Київ&lang=ua'

@@ -24,38 +24,19 @@ class Account(tk.CTk):
 
 
         pen.execute("SELECT rowid, * FROM users")
-        # if pen is not None:
-        #     country = pen.fetchone()[0]
-        #     city = pen.fetchone()[1]
-        #     name = pen.fetchone()[2]
-        # else:
-        #     surname = pen.fetchone()[3]
-        # print(pen.fetchall())
-        # a = pen.fetchone()
-        # print(a)
-        # country = pen.fetchone()[0]
-        # city = pen.fetchone()[1]
-        # name = pen.fetchone()[2]
-        # surname = pen.fetchone()[3]
-        # bebra = [
-            # pen.fetchone()[0],
-            # pen.fetchone()[1],
-            # pen.fetchone()[2],
-            # pen.fetchone()[3],
-        # ]
+
         for i in pen:
             country = i[1]
             city = i[2]
             name = i[3]
             surname = i[4]
 
-        # self.city_image_path = os.path.join(os.path.dirname(__file__), 'icon\user.png')
 
-        self.image_path = os.path.join(os.path.dirname(__file__), 'img\\left-arrow.png')
-        self.image = tk.CTkImage(light_image= Image.open(self.image_path), size=(50,50),)
-        # self.image.grid(row=0,column=0, padx=100)
-        self.image_label = tk.CTkLabel(self, image=self.image,fg_color="#5DA7B1", text=' ')
-        self.image_label.grid(row=0,column=0, padx=400,sticky='ne'), 
+        # self.image_path = os.path.join(os.path.dirname(__file__), 'icon/left-arrow.png')
+        # self.image = tk.CTkImage(light_image= Image.open(self.image_path), size=(50,50),)
+        # # self.image.grid(row=0,column=0, padx=100)
+        # self.image_label = tk.CTkLabel(self, image=self.image,fg_color="#5DA7B1", text=' ')
+        # self.image_label.grid(row=0,column=0, padx=400,sticky='ne'), 
         self.text_label = tk.CTkLabel(self, fg_color="#5DA7B1", text='Вихід',bg_color='#5DA7B1',font = ("Roboto Slab", 16))
         self.text_label.grid(row=0,column=0, padx=363,pady=10,sticky='wn')
         self.title = tk.CTkLabel(self, text = "Особистий кабінет", font = ("Inter", 28), fg_color = "#5DA7B1", width=100)
@@ -120,7 +101,10 @@ class Account(tk.CTk):
         
         self.surname_field.grid(row=0, column=0,padx=20,pady=40+270,sticky='wn')
 
-        self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 39, text='Перейти до додатку', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18),)
+        def close_window():
+            self.destroy()
+
+        self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 39, text='Перейти до додатку', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18), command=close_window)
         self.save_button.grid(row=0, column=0, padx=115, pady=(530,0), sticky="wn")
             
 
@@ -135,4 +119,4 @@ class Account(tk.CTk):
 
 
 
-Account().mainloop()
+# Account().mainloop()

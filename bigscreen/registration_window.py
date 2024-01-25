@@ -4,6 +4,8 @@ import requests
 import json
 import sqlite3 
 import os
+# import bigscreen.create_window
+from bigscreen.create_window import *
 
 # city = input("Enter the city name: ")
 # url_api = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_key}"
@@ -17,12 +19,12 @@ pen = db.cursor()
 
 go_to_main = False
 
-# pen.execute("""CREATE TABLE IF NOT EXISTS users ( 
-#         country TEXT,
-#         city TEXT,
-#         name TEXT,
-#         surname TEXT
-# )""")
+pen.execute("""CREATE TABLE IF NOT EXISTS users ( 
+        country TEXT,
+        city TEXT,
+        name TEXT,
+        surname TEXT
+)""")
 
 
 
@@ -127,30 +129,40 @@ class Register(tk.CTk):
                                 )
         self.surname_field.grid(row=0, column=0,padx=8,pady=44+270,sticky='wn')
         
-
         def inputs():
-            pen.execute(f"INSERT INTO users VALUES('{self.country_field.get("0.0", "end").replace("\n","")}', '{self.city_field.get("0.0", "end").replace("\n","")}', '{self.name_field.get("0.0", "end").replace("\n","")}', '{self.surname_field.get("0.0", "end").replace("\n","")}')")
-
             pen.execute("SELECT rowid, * FROM users")
+            pen.execute(f"INSERT INTO users VALUES('{self.country_field.get("0.0", "end").replace("\n","")}', '{self.city_field.get("0.0", "end").replace("\n","")}', '{self.name_field.get("0.0", "end").replace("\n","")}', '{self.surname_field.get("0.0", "end").replace("\n","")}')")
+            
+
+            # pen.execute("SELECT rowid, * FROM users")
             print(pen.fetchall())
+            # db.commit()
             db.commit()
+            App().mainloop()
             db.close()
-            go_to_main = True
+            go_to_naxuy = True
             
-        self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 46, text='Зберегти', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18), command=inputs)
-        self.save_button.grid(row=0, column=0, padx=0, pady=(320,0), )
+        def go_to_main():
+            self.destroy()
             
+        self.save_button = tk.CTkButton(self, fg_color = "#096C82", width = 218, height = 46, text='Зберегти', hover_color='#074A59',bg_color='#5DA7B1',border_color='white',border_width=2,corner_radius=15, font = ("Roboto Slab", 18), command=inputs )
+        self.save_button.grid(row=0, column=0, padx=0, pady=(320,0))
 
 
-            
-register = Register()
-# API_key = "58cd4aa232816cd0ae10351cb15604aa"
-# url_api = f"https://api.openweathermap.org/data/2.5/weather?q={register.city_field}&appid={API_key}"
-# response = requests.get(url_api)
-# print(response.temp , 'red')
-# print(url_api, 'green')
 
-register.mainloop()
+# if Register.go_to_naxuy
+
+    # def go_to_main(self):
+    #     App().mainloop()
+            
+# register = Register()
+# # API_key = "58cd4aa232816cd0ae10351cb15604aa"
+# # url_api = f"https://api.openweathermap.org/data/2.5/weather?q={register.city_field}&appid={API_key}"
+# # response = requests.get(url_api)
+# # print(response.temp , 'red')
+# # print(url_api, 'green')
+
+# register.mainloop()
 
 # from create_window import *
 
